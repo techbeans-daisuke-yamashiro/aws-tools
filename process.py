@@ -16,7 +16,6 @@ pprint(args)
 
 # オプション'execute'を処理
 execute = not args.execute
-print(f'execute = {execute}')
 # オプション'profile'を処理
 profile = args.profile if args.profile else 'tb_test'
 # オプション'profile'を処理
