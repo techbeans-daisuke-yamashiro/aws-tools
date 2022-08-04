@@ -19,7 +19,7 @@ pprint(args)
 execute = not args.execute
 # オプション'profile'を処理
 profile = args.profile if args.profile else 'tb_test'
-# オプション'profile'を処理
+# オプション'snapshot'を処理
 snapshot = args.snapshot if args.snapshot else None
 
 #EC2クライアントを作成
