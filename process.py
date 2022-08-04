@@ -1,5 +1,6 @@
 import boto3,botocore
 import random
+import time
 import argparse
 from pprint import pprint
 
@@ -16,6 +17,7 @@ pprint(args)
 
 # オプション'execute'を処理
 execute = not args.execute
+print(f'execute = {execute}')
 # オプション'profile'を処理
 profile = args.profile if args.profile else 'tb_test'
 # オプション'profile'を処理
@@ -34,7 +36,6 @@ def main():
     else:
         volumes = [_v for _v in volumes['Volumes'] if not _v['Attachments'] and _v['SnapshotId']==snapshot]
     count = 0
-
     for volume in volumes:
         count += 1
         v = volume['VolumeId']
@@ -47,6 +48,15 @@ def main():
                 print(e.response['Error'])
             else:
                 raise e
+        print('Sleep for a 500 mill-second')
+        time.sleep(500/1000)
 
 if __name__ == '__main__':
     main()
+
+
+# リストを分割
+def split_list(l, n):
+
+    for idx in range(0, len(l), n):
+        yield l[idx:idx + n]
