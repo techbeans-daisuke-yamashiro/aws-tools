@@ -34,11 +34,13 @@ def main():
         volumes = [_v for _v in volumes['Volumes'] if not _v['Attachments']]
     else:
         volumes = [_v for _v in volumes['Volumes'] if not _v['Attachments'] and _v['SnapshotId']==snapshot]
+    count = 0
 
     for volume in volumes:
-        v =volume['VolumeId']
+        count += 1
+        v = volume['VolumeId']
         try:
-            print(f'trying volume={v} DryRun={execute}')
+            print(f'count={count} trying volume={v} DryRun={execute}')
             ec2.delete_volume(VolumeId=v, DryRun=execute)
 
         except botocore.exceptions.ClientError as e:
